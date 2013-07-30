@@ -13,12 +13,10 @@ the Gem generates a mobile optimized layout with open source libraries such as:
 Add to your Gemfile and run the `bundle` command to install it.
 
 ```ruby
-gem "hebrew_moblize"
+gem "moblize"
 ```
 
 **Requires Ruby 1.9.2 or later.**
 
 
 ## Usage
-
-This gem is created by Ryan Bates and is under the MIT License.
