@@ -1,0 +1,126 @@
+<% @brand  = current_user.brand %>
+
+<subview ui-associations="withNavBar ">
+  <scrollpanel>
+
+    <tableview ui-kind="grouped icon"  style="display:none;" id="actions_bar">
+      <tableheader>
+        Recommended Actions
+      </tableheader>
+
+      <tablecell >
+        <div class="actions_icon"> <%= image_tag("/assets/mobile/icons2/black/posting.png" ) %></div>
+        <celltitle><%= link_to " Reply"%></celltitle>
+      </tablecell>
+
+
+      <% if @post.kind.include? "inbox" %>
+        <tablecell >
+          <celltitle><%= link_to "Reply with Template"%></celltitle>
+        </tablecell>
+        <tablecell>
+          <div class="actions_icon"> <%= image_tag("/assets/mobile/icons2/black/posting.png" , :size => "28x28" ) %></div>
+          <celltitle><%= link_to "Unsubscribe from group"%> </celltitle>
+        </tablecell>
+      <% end %>
+
+      <% if @post.kind.include? "group" %>
+        <tablecell >
+          <div class="actions_icon"> <%= image_tag("/assets/mobile/icons2/black/web.png" , :size => "24x24") %></div>
+          <celltitle><%= link_to "Go to group page"%></celltitle>
+        </tablecell>
+        <tablecell>
+          <div class="actions_icon"> <%= image_tag("/assets/mobile/icons2/black/group.png" ) %></div>
+          <celltitle><%= link_to "Unsubscribe from group"%> </celltitle>
+        </tablecell>
+      <% end %>
+
+      <tableheader>
+        Facebook fan pages
+      </tableheader>
+      
+      <% for pg in @brand.fan_pages do %>
+          <tablecell>
+            <div class="actions_icon"> <%= image_tag("/assets/mobile/icons2/black/facebook.png" ) %></div>
+            <celltitle><%= link_to "Post to #{pg.name}","/posts/post_to?id=#{@post.id}&channel=facebook&page=#{pg.uid}&redirect=#{request.original_url}"%> </celltitle>
+          </tablecell>
+        <% end %>
+        <tableheader>
+          Twitter Accounts
+        </tableheader>
+        <tablecell>
+          <div class="actions_icon"> <%= image_tag("/assets/mobile/icons2/black/twitter_bird.png" ) %></div>
+          <celltitle><%= link_to "Post to Twitter", "/posts/post_to?id=#{@post.id}&channel=twitter&redirect=#{request.original_url}" %> </celltitle>
+        </tablecell>
+
+        <tablecell>
+          <div class="actions_icon"> <%= image_tag("/assets/mobile/png/article32.png" , :size => "28x28" ) %></div>
+          <celltitle><%= link_to "Create Article" ,"/articles/new?from_kind=post&from_id=#{@post.id}"%> </celltitle>
+        </tablecell>
+
+
+        <tablecell>
+          <div class="actions_icon"> <%= image_tag("/assets/mobile/icons2/black/linkedin.png" ) %></div>
+          <celltitle><%= link_to "Post to Linkedin", "/posts/post_to?id=#{@post.id}&channel=linkedin&redirect=#{request.original_url}"%> </celltitle>
+        </tablecell>
+
+      </tableview>
+
+      <tableview >
+        <% if @post.title %>
+          <tablecell >
+            <%= strip_html  @post.title %>
+          </tablecell>
+        <% end %>
+
+        <tablecell>
+          <% unless @post.kind.include? "inbox" or (@post.channel.present? and @post.channel.rss?) %>
+            <div style="float:left;padding:1em;">
+              <img src="<%= @post.img %>" style="display:block;" />
+            </div>
+          <% end %>
+          
+          <%= @post.from_name %>
+
+          <div style="float:right;">
+            <% unless @post.posted_at.nil? %>
+              <%= time_ago_in_words @post.posted_at %> 
+            <% end %>
+          </div>
+
+        </tablecell>
+
+        <% if @post.kind.include? "video" %>
+          <tablecell >
+            <a href ="<%=@post.target_link%>" target="_blank">
+              <img src="<%= @post.img %>" width="100%" style="display:block;width=100%;" />
+            </a>
+          </tablecell>
+        <% else %>
+          <tablecell >
+            <div class="post-body" style="padding:1em;">
+              <%= simple_format(@post.body) %>
+            </div>
+          </tablecell>
+        <% end %>
+      </tableview>
+
+
+
+    </scrollpanel>
+  </subview>
+
+
+  <% content_for :action do  %>
+    <a href ="" id="action_btn">
+      <uibutton ui-implements="icon" ui-bar-align="left">
+        <icon style="-webkit-mask-image: url(/assets/mobile/icons/icon_comment_add.png)"></icon>
+      </uibutton>
+    </a>
+  <% end %>
+
+
+  <style>
+    .post-body img{ width:95%; text-align: center}
+  </style>
+

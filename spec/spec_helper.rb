@@ -1,0 +1,2 @@
+require 'mobilize'
+require 'supermodel'

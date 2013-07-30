@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en" manifest="cache.manifest">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/mobile.css">
+    <script src="/assets/mobile/zepto.js"></script>
+    <script src="/assets/mobile/chui.js"></script>
+    <script src="/assets/mobile/iscroll.js"></script>
+
+    <%%= csrf_meta_tags %>
+    <%%= yield :head  %>
+
+
+    <link rel="apple-touch-startup-image" href="startup.png">
+    <link rel="apple-touch-icon" href="app-icon.png"/>
+    <link rel="shortcut icon" href="favicon.ico">
+    <title>Your App Name</title>
+
+    <style type="text/css">
+
+
+      @font-face {
+        font-family: socialmachine;
+        src: url("/assets/socialmachine.woff") format("opentype");
+      }
+
+
+
+      /* Local Styles Here */
+
+
+      navbar uibutton{
+        background:none;
+        border:none;
+        color:#444;
+      }
+
+
+      tablecell > celltitle {
+        font-weight: normal;
+      }
+
+      tablecell > celltitle {
+        font-size: 15px;
+        margin-top: 2px;
+      }
+
+      tablecell[ui-usage="image"] > img + celltitle {
+        position: relative;
+        font-size:14px;
+        top: 2px;
+        width: 70%;
+      }
+
+      #main {
+        background-color: #fef;
+      }
+
+      #main navbar {
+        background-color: #f3f3f3;
+        background-image: none;
+        color:#e04006;
+      }
+
+      #main navbar h1{
+        color:#e04006;
+        text-shadow:none;
+      }
+
+      subview.selected {
+        z-index: 100000;
+        -webkit-transform: translate3d(0,0,0);
+      }
+      subview.unselected {
+        -webkit-transform: translate3d(100%,0,0);
+      }
+
+
+      subview {
+        top: 45px;
+        bottom: 0px;
+      }
+
+
+      tabbar {
+        background-image:none;
+        background-color: #f3f3f3;
+        color:#e04006;
+        height:00px;
+      }
+
+      tabbar > uibutton > icon + label {
+        color:#e04006;
+      }
+
+      a{
+        text-decoration:none;
+        color:#e04006;
+      }
+
+      .footer-bar{
+        background-image: none;
+        background-color: #f3f3f3;
+        color: #e04006;
+        height: 60px;
+      }
+
+
+      .footer-bar a {
+        text-decoration: none;
+        color: #e04006;
+      }
+      .footer-bar uibutton label{
+        vertical-align: top;
+        margin: 0;
+        padding: 0;
+      }
+      .footer-bar uibutton icon{
+        display: block;
+        margin: 0;
+        height: 30px;
+        width: 30px;
+        margin-bottom: -8px;
+        background-image: 
+          -webkit-gradient(linear, 0% 0%, 0% 100%, 
+          from(#A6A6A6), 
+          to(#606060), 
+          color-stop(.5,#8C8C8C));
+        -webkit-box-shadow: #000 0 1px 0px;
+        -webkit-mask-size: 30px 30px;
+        background-size: 30px 30px;
+      }
+      .footer-bar uibutton{
+
+
+        text-align: center;
+        color: #e04006;
+        position: relative;
+        background-image: none;
+        border: none;
+        -webkit-box-shadow: none;
+        margin: 3px 3px 3px 3px;
+        padding: 4px 0 0 0;
+      }
+
+      scrollpanel{
+        background-color:#fff;
+      }
+      tableheader{
+        background-color: #DDD;
+        color:#333;
+      }
+
+
+      table{width:100%;}
+      .mobile-td-title{ background-color: #aaa; color:#fff; padding:0.2em;font-size:13px;line-height: 16px;}
+      .mobile-td-value{ background-color: #ddd; color:#333; padding:0.2em;font-size:13px;line-height: 16px;}
+
+
+
+      /* 
+       * Profile box for fans, competitors etc..
+      */
+      .profile-box{
+        width:100%;
+<%#*background-color:olivedrab;%>
+        color:#333;       
+      }  
+
+      .profile-box img{
+        border:1px solid #fff;
+        margin-top:1em;
+        margin-left:1em;
+      }
+
+      .profile-box h3{
+        color:#e04006;
+        font-size:15px;
+        line-height: 17px;
+        margin-bottom: 0px;
+      }
+
+      .profile-box p{
+        color:#999;
+        font-size:13px;
+        line-height: 15px;
+
+      }
+
+
+      .channel h3{ margin-bottom:0px; padding-bottom:0px;}
+      .channel p{ margin-top:0px; padding-top:0px;}
+      /* HEBREW SUPPORT 
+      body{
+        direction:rtl;
+      }
+
+      .table th, .table td {
+        text-align: right;
+      }
+
+      .pull-right{
+        float: left;
+      }
+
+      .tweet_list .tweet_avatar img {
+        float:right;
+      }
+
+
+      tablecell[ui-usage="image"] > img {
+        float: right !important;
+        height: 55px;
+        width: 55px;
+        margin-left: 6px;
+        margin-right:0px;
+      }
+      */
+    </style>
+
+    <style>
+      .big-number{
+        font-family: 'Ubuntu', sans-serif;
+        font-size:23px;
+        color:#000;
+      }
+      .big-number h3{
+        color:#aaa;
+        font-size:13px;
+        margin-bottom:0px;
+      }
+      .big-number p{
+        color:#0;
+        padding-top:0px;
+        margin-top: 0px;
+        font-size:28px;
+        font-weight: bold;
+      }
+
+      .small-number{
+        font-family: 'Ubuntu', sans-serif;
+        font-size:13px;
+        color:#aaa;
+
+      }
+      .small-number h3{
+        color:#aaa;
+        margin-bottom:0px;
+        font-size:13px;
+        line-height:14px;
+
+      }
+      .small-number p{
+        color:#ddd;
+        padding-top:0px;
+        margin-top: 0px;
+        font-size:28px;
+        font-weight: bold;
+      }
+
+      .tiny{
+        font-size:12px;
+        color:#333;
+      }
+
+      .social-icon{
+        display:none;
+        font-family:socialmachine;
+        font-size:13px;
+        color:#e04006;
+        background-color: #fff;
+        width:36px;
+        margin-left:1em;
+        padding:0.2em;
+      }
+
+      .actions_icon{
+        float:left;padding-left:0em;padding-right:0em;vertical-align: top;margin-top:2px;padding-right:0.4em;
+      }
+      .actions_icon img{ width:20px;height: 20px;}
+      .channel_icon{ float:left;padding-top:0.8em;}
+      .channel_icon img{ width:24px;height:24px;}
+      .channel{
+        text-align: left;
+        padding:0.2em;
+      }
+      .channel a{
+        background-color:#aaa;
+      }
+      .channel h3{
+        font-size: 13px;
+      }
+      .channel p{
+        font-size: 12px;
+      }
+    </style>
+
+
+    <script>
+                 
+      $(document).ready(function() {
+        $("#action_btn").click(function() {
+          $("#actions_bar").toggle();
+          return false;
+        });
+      });                 
+
+    </script>
+
+
+
+
+
+  </head>
+  <body>
+  <app>
+    <view id="main" ui-background-style="striped" ui-navigation-status="current">
+
+      <navbar class="ui-custom-tint">
+        <%%= yield :action %>
+
+        <h1 ui-bar-alignment="center">Application Name</h1>
+        <a href ="/brands">
+          <uibutton ui-implements="icon" ui-bar-align="right">
+            <icon style="-webkit-mask-image: url(/assets/mobile/png/home32.png)"></icon>
+          </uibutton>
+        </a>
+      </navbar>
+
+      <%% unless flash.empty? %>
+        <div class="info">
+          <%%- flash.each do |name, msg| -%>
+            <%%= content_tag :div, msg, :id => "flash_#{name}" %>
+          <%%- end -%>
+        </div>
+      <%% end %>
+
+
+      <%%= yield %>
+      <!--
+      <toolbar ui-placement="bottom" class="footer-bar">
+<%#= yield :footer %>
+      </toolbar>
+      -->
+    </view>
+  </app>
+</body>
+</html>
+

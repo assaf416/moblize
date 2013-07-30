@@ -1,0 +1,11 @@
+Description:
+    Explain the generator
+
+Example:
+    rails generate mobilze install 
+    This will install the necessary files to setup the app
+
+
+    rails generate mobilze model <ModelName> 
+    This will generate the index, and show pages for each model
+        

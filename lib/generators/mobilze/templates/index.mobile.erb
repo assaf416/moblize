@@ -1,0 +1,37 @@
+
+
+<subview ui-associations="withNavBar ">
+  <scrollpanel>
+ <tableview ui-kind="grouped icon"  style="display:none;" id="actions_bar">
+      <tableheader>
+        Recommended Actions
+      </tableheader>
+
+      <tablecell >
+        <div class="actions_icon"> <%#= image_tag("/assets/mobile/icons2/black/posting.png" ) %></div>
+        <celltitle><%= link_to " Reply"%></celltitle>
+      </tablecell>
+
+   
+      </tableview>
+
+
+    <tableview>
+      <tableheader>
+        <%= params[:kind] %>
+      </tableheader>
+      <% for post in @posts do  %>
+          <tablecell ui-usage="image">
+            <%=  image_tag(post.img, :size => "50x50")%>
+            <celltitle><b><%= link_to simple_format(post.title) , post%></b></celltitle>
+            <celldetail><%= link_to strip_html(post.body)[0..140], post unless post.body.nil? %> </celldetail>
+          </tablecell>
+        <% end %>
+
+      </tableview>
+
+    </scrollpanel>
+  </subview>
+
+
+
