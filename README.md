@@ -20,3 +20,8 @@ gem "moblize"
 
 
 ## Usage
+
+
+-- rails g mobilize install 
+-- rails g mobilize model <ModelName>
+ 
